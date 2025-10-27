@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danodarda Live View</title>
+
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://unpkg.com/AR.js@3.4.5/aframe/build/aframe-ar-nft.js"></script>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <h1>🏡 Danodarda Live View</h1>
+    <p>Move your phone to explore nearby places in AR!</p>
+  </header>
+
+  <a-scene vr-mode-ui="enabled: false" embedded arjs="sourceType: webcam; debugUIEnabled: false;" id="ar-scene">
+    <a-camera gps-camera rotation-reader></a-camera>
+  </a-scene>
+
+  <div id="map-container">
+    <div id="map"></div>
+  </div>
+
+  <footer>
+    <button id="toggle-view">Switch View</button>
+  </footer>
+</body>
+</html>

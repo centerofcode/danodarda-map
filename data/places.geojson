@@ -1,0 +1,70 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ramji Temple"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          72.2525,
+          23.6642
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Brahmani Mataji Mandir"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          72.2515,
+          23.6635
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Primary School"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          72.252,
+          23.663
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bus Stop"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          72.251,
+          23.664
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Water Tank"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          72.2528,
+          23.6637
+        ]
+      }
+    }
+  ]
+}
