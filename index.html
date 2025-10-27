@@ -1,63 +1,98 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Danodarda Live View</title>
-
-  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-  <script src="https://unpkg.com/AR.js@3.4.5/aframe/build/aframe-ar-nft.js"></script>
-
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-  <link rel="stylesheet" href="style.css" />
-  <script src="script.js" defer></script>
-</head>
-
-<body>
-  <header>
-    <h1>🏡 Danodarda Live View</h1>
-    <p>Move your phone to explore nearby places in AR!</p>
-  </header>
-
-  <a-scene vr-mode-ui="enabled: false" embedded arjs="sourceType: webcam; debugUIEnabled: false;" id="ar-scene">
-    <a-camera gps-camera rotation-reader></a-camera>
-  </a-scene>
-
-  <div id="map-container">
-    <div id="map"></div>
-  </div>
-
-  <footer>
-    <button id="toggle-view">Switch View</button>
-  </footer>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>GeoAR.js demo</title>
-        <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-        <script src="https://unpkg.com/aframe-look-at-component@1.0.0/dist/aframe-look-at-component.min.js"></script>
-        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+        <title>AR Location Map Demo</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+        <script src="https://raw.githack.com/AR-js-org/AR.js/3.4.7/aframe/build/aframe-ar.js"></script>
     </head>
-
-    <body>
+    <body style="margin: 0; overflow: hidden">
         <a-scene
+            embedded
+            arjs="sourceType: webcam; debugUIEnabled: false;"
             vr-mode-ui="enabled: false"
-            arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;"
+            renderer="logarithmicDepthBuffer: true;"
         >
-            <a-text
-                value="This content will always face you."
-                look-at="[gps-camera]"
-                scale="120 120 120"
-                gps-entity-place="latitude: 23.08485866181749; longitude: 72.57064291583747;"
-            ></a-text>
-            <a-camera gps-camera rotation-reader> </a-camera>
+            <!-- AR Camera with GPS -->
+            <a-camera
+                gps-new-camera="gpsMinDistance: 5"
+                rotation-reader
+            ></a-camera>
+
+            <!-- Marker/Location Example - Replace with your real coordinates -->
+            <a-image
+                src="icons/marker.png"
+                gps-new-entity-place="latitude: 23.0225; longitude: 72.5714"
+                scale="10 10 10"
+                look-at="[gps-new-camera]"
+                custom-marker
+            ></a-image>
+
+            <!-- Place Name Tag -->
+            <a-entity
+                text="value: City Hall; color: #FFD600; width: 8;"
+                gps-new-entity-place="latitude: 23.0225; longitude: 72.5714"
+                scale="20 20 20"
+                look-at="[gps-new-camera]"
+            ></a-entity>
+
+            <!-- Navigation Arrow Example (Static Direction) -->
+            <a-entity
+                gltf-model="url(assets/arrow.glb)"
+                material="color: red"
+                gps-new-entity-place="latitude: 23.08485866181749; longitude: 72.57064291583747"
+                scale="20 20 20"
+                look-at="[gps-new-camera]"
+            ></a-entity>
+
+            <!-- Distance label (updates via JS below) -->
+            <a-entity
+                id="distanceLabel"
+                text="value: ; color: #00F; width: 6;"
+                gps-new-entity-place="latitude: 23.0225; longitude: 72.5714"
+                position="0 30 0"
+                look-at="[gps-new-camera]"
+            ></a-entity>
         </a-scene>
+
+        <script>
+            document.addEventListener(
+                "gps-camera-update-position",
+                function (e) {
+                    // Hardcoded example target location
+                    var targetLat = 23.0225;
+                    var targetLon = 72.5714;
+                    var pos = e.detail.position;
+                    var userLat = pos.latitude;
+                    var userLon = pos.longitude;
+                    // Compute Haversine distance
+                    function toRad(x) {
+                        return (x * Math.PI) / 180;
+                    }
+                    var R = 6378137; // Radius of Earth in meters
+                    var dLat = toRad(targetLat - userLat);
+                    var dLon = toRad(targetLon - userLon);
+                    var a =
+                        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                        Math.cos(toRad(userLat)) *
+                            Math.cos(toRad(targetLat)) *
+                            Math.sin(dLon / 2) *
+                            Math.sin(dLon / 2);
+                    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+                    var d = Math.round(R * c);
+
+                    // Update distance label
+                    var distanceLabel =
+                        document.getElementById("distanceLabel");
+                    if (distanceLabel) {
+                        distanceLabel.setAttribute(
+                            "text",
+                            "value",
+                            `${d} meters`
+                        );
+                    }
+                }
+            );
+        </script>
     </body>
 </html>
