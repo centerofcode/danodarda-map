@@ -1,53 +1,57 @@
-
-
 <!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danodarda Live View</title>
+
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://unpkg.com/AR.js@3.4.5/aframe/build/aframe-ar-nft.js"></script>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <h1>🏡 Danodarda Live View</h1>
+    <p>Move your phone to explore nearby places in AR!</p>
+  </header>
+
+  <a-scene vr-mode-ui="enabled: false" embedded arjs="sourceType: webcam; debugUIEnabled: false;" id="ar-scene">
+    <a-camera gps-camera rotation-reader></a-camera>
+  </a-scene>
+
+  <div id="map-container">
+    <div id="map"></div>
+  </div>
+
+  <footer>
+    <button id="toggle-view">Switch View</button>
+  </footer>
+</body>
+</html> -->
+
+<!DOCTYPE html>
 <html>
     <head>
-        <title>Danodarda AR Map</title>
+        <title>Danodarda AR Test</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+        <script src="https://unpkg.com/AR.js@3.4.5/aframe/build/aframe-ar-nft.js"></script>
+        <script src="https://raw.githack.com/jeromeetienne/AR.js/3.4.5/aframe/build/aframe-ar.js"></script>
     </head>
     <body style="margin: 0; overflow: hidden">
         <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
             <a-camera gps-camera rotation-reader></a-camera>
 
-            <!-- Example landmarks -->
+            <!-- Example label -->
             <a-text
-                gps-entity-place="latitude:23.6642; longitude:72.2525;"
+                gps-entity-place="latitude:23.08485866181749; longitude:72.57064291583747;"
                 value="Ramji Temple"
-                look-at="[gps-camera]"
-                scale="20 20 20"
-                color="#FFD700"
-            >
-            </a-text>
-            <a-text
-                gps-entity-place="latitude:23.6638; longitude:72.2515;"
-                value="Brahmani Mataji Mandir"
-                look-at="[gps-camera]"
-                scale="20 20 20"
-                color="#FFD700"
-            >
-            </a-text>
-            <a-text
-                gps-entity-place="latitude:23.6630; longitude:72.2520;"
-                value="Primary School"
-                look-at="[gps-camera]"
-                scale="20 20 20"
-                color="#FFD700"
-            >
-            </a-text>
-            <a-text
-                gps-entity-place="latitude:23.6635; longitude:72.2510;"
-                value="Bus Stop"
-                look-at="[gps-camera]"
-                scale="20 20 20"
-                color="#FFD700"
-            >
-            </a-text>
-            <a-text
-                gps-entity-place="latitude:23.6640; longitude:72.2518;"
-                value="Water Tank"
                 look-at="[gps-camera]"
                 scale="20 20 20"
                 color="#FFD700"
