@@ -1,41 +1,4 @@
 <!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Danodarda Live View</title>
-
-  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-  <script src="https://unpkg.com/AR.js@3.4.5/aframe/build/aframe-ar-nft.js"></script>
-
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-  <link rel="stylesheet" href="style.css" />
-  <script src="script.js" defer></script>
-</head>
-
-<body>
-  <header>
-    <h1>🏡 Danodarda Live View</h1>
-    <p>Move your phone to explore nearby places in AR!</p>
-  </header>
-
-  <a-scene vr-mode-ui="enabled: false" embedded arjs="sourceType: webcam; debugUIEnabled: false;" id="ar-scene">
-    <a-camera gps-camera rotation-reader></a-camera>
-  </a-scene>
-
-  <div id="map-container">
-    <div id="map"></div>
-  </div>
-
-  <footer>
-    <button id="toggle-view">Switch View</button>
-  </footer>
-</body>
-</html> -->
-
-<!DOCTYPE html>
 <html>
     <head>
         <title>Danodarda AR Map</title>
@@ -46,8 +9,6 @@
     <body style="margin: 0; overflow: hidden">
         <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
             <a-camera gps-camera rotation-reader></a-camera>
-
-            <!-- Example landmarks -->
             <a-text
                 gps-entity-place="latitude:23.6642; longitude:72.2525;"
                 value="Ramji Temple"
@@ -88,6 +49,37 @@
                 color="#FFD700"
             >
             </a-text>
+        </a-scene>
+    </body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AR.js A-Frame Location-based</title>
+        <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+        <script
+            type="text/javascript"
+            src="https://raw.githack.com/AR-js-org/AR.js/3.4.7/three.js/build/ar-threex-location-only.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="https://raw.githack.com/AR-js-org/AR.js/3.4.7/aframe/build/aframe-ar.js"
+        ></script>
+    </head>
+    <body>
+        <a-scene
+            vr-mode-ui="enabled: false"
+            arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false"
+            renderer="antialias: true; alpha: true"
+        >
+            <a-camera gps-new-camera="gpsMinDistance: 5"></a-camera>
+            <a-entity
+                material="color: red"
+                geometry="primitive: box"
+                gps-new-entity-place="latitude: <add-your-latitude>; longitude: <add-your-longitude>"
+                scale="10 10 10"
+            ></a-entity>
         </a-scene>
     </body>
 </html>
